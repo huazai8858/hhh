@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+</head>
+<body>
+
+在使用ajax获取数据时，使用vue-resource 更加合适。
+
+使用vue-resource代码如下：
+
+复制代码
+<script type="text/javascript">
+
+    new Vue({
+        el:'#app',
+        data:{data:""},
+        created:function(){
+            var url="json.jsp";
+
+            this.$http.get(url).then(function(data){
+                var json=data.body;
+                this.data=eval("(" + json +")");
+            },function(response){
+                console.info(response);
+            })
+        }
+    });
+</script>
+复制代码
+
+
+使用jquery的时候，代码如下：
+
+复制代码
+<script type="text/javascript">
+    new Vue({
+        el:'#app',
+        data:{data:""},
+        beforeCreate:function(){
+            var url="json.jsp";
+            var This=this;
+            $.get(url,function(data){
+                This.data=eval("(" + data +")");
+            })
+        }
+    });
+</script>
+复制代码
+</body>
+</html>
